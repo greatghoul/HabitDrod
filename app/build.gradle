@@ -29,6 +29,14 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.0.0-beta1'
     implementation 'com.android.support:design:26.0.0-beta1'
     testImplementation 'junit:junit:4.12'
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    testCompile 'org.json:json:20160810' // https://stackoverflow.com/a/41180857/260793
+    testCompile "com.github.tomakehurst:wiremock:2.8.0"
+    implementation ('com.github.jkcclemens:khttp:0.1.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+
 }
