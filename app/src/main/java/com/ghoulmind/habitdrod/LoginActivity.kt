@@ -1,6 +1,7 @@
 package com.ghoulmind.habitdrod
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import com.ghoulmind.habitica.HabiticaException
 
 import kotlinx.android.synthetic.main.activity_login.*
 import android.os.AsyncTask
+import android.view.View
 import org.json.JSONObject
 
 
@@ -64,7 +66,14 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 saveUserCredentials(data.getString("id"), data.getString("apiToken"))
                 Toast.makeText(applicationContext, "Welcome", Toast.LENGTH_LONG).show()
+                goTasksPage()
             }
         }
     }
+
+    private fun goTasksPage() {
+        startActivity( Intent(this, TasksActivity::class.java))
+    }
+
+
 }

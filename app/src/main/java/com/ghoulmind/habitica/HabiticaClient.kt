@@ -1,7 +1,10 @@
 package com.ghoulmind.habitica
 
+import android.content.Context
+import com.ghoulmind.habitdrod.R
 import khttp.get
 import khttp.post
+import org.json.JSONArray
 import org.json.JSONObject
 
 class HabiticaClient {
@@ -22,6 +25,20 @@ class HabiticaClient {
 
         if (result.getBoolean("success")) {
             return result.getJSONObject("data")
+        } else {
+            val error = result.getString("error")
+            val message = result.getString("message")
+            throw HabiticaException("$error: $message")
+        }
+    }
+
+    fun getTasks(apiKey: String, apiUser: String): JSONArray {
+
+        val result = get(endpoint("/tasks/user"), headers = mapOf("x-api-key" to apiKey, "x-api-user" to apiUser)).jsonObject
+
+        if (result.getBoolean("success")) {
+            var data = result.getJSONArray("data")
+            return data
         } else {
             val error = result.getString("error")
             val message = result.getString("message")
